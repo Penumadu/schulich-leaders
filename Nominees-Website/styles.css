@@ -1,0 +1,356 @@
+:root {
+    --bg-color: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --blueprint-blue: #1e40af;
+    --blueprint-light: #eff6ff;
+    --accent-gold: #b45309;
+    --accent-gold-light: #fef3c7;
+    --border-color: #cbd5e1;
+    --border-focus: #1e40af;
+    --card-bg: #ffffff;
+    --grid-color: rgba(30, 64, 175, 0.04);
+    --grid-major-color: rgba(30, 64, 175, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    background-image: 
+        linear-gradient(var(--grid-major-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-major-color) 1px, transparent 1px),
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+/* Blueprint Header Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 2px solid var(--blueprint-blue);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(30, 64, 175, 0.05);
+}
+
+/* Corner Tick Marks for Blueprint Aesthetic */
+.container::before, .container::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--blueprint-blue);
+    border-style: solid;
+    pointer-events: none;
+}
+.container::before {
+    top: -5px;
+    left: -5px;
+    border-width: 2px 0 0 2px;
+}
+.container::after {
+    bottom: -5px;
+    right: -5px;
+    border-width: 0 2px 2px 0;
+}
+
+/* Header Section */
+header {
+    margin-bottom: 3rem;
+    border-bottom: 2px dashed var(--blueprint-blue);
+    padding-bottom: 2rem;
+}
+
+.blueprint-metadata {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--blueprint-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.blueprint-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--blueprint-blue);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.blueprint-title .accent-year {
+    color: var(--accent-gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+/* Navigation Tabs */
+.tabs-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    color: var(--text-secondary);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.2s ease;
+    position: relative;
+    top: 2px;
+}
+
+.tab-btn:hover {
+    color: var(--blueprint-blue);
+    background-color: var(--blueprint-light);
+}
+
+.tab-btn.active {
+    background-color: var(--card-bg);
+    color: var(--blueprint-blue);
+    border-color: var(--blueprint-blue);
+    border-width: 2px 2px 0 2px;
+    font-weight: 700;
+    z-index: 10;
+}
+
+/* Search Area */
+.search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--blueprint-light);
+    border: 1px solid var(--blueprint-blue);
+    padding: 1.5rem;
+    border-radius: 4px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.85rem 1.2rem;
+    font-size: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+}
+
+.stats {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--blueprint-blue);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stats::before {
+    content: '●';
+    color: var(--accent-gold);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Grid Layout */
+.nominees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Blueprint Card Styling */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blueprint-blue);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Scholar visual accent badge */
+.card.scholar-card {
+    border-top-color: var(--accent-gold);
+    background-color: rgba(254, 243, 199, 0.15);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    border-color: var(--blueprint-blue);
+    box-shadow: 0 6px 15px rgba(30, 64, 175, 0.08);
+}
+
+.card.scholar-card:hover {
+    border-color: var(--accent-gold);
+    box-shadow: 0 6px 15px rgba(180, 83, 9, 0.08);
+}
+
+/* Technical Drafting Markers on Cards */
+.card-prefix {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.card-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blueprint-blue);
+    margin-top: 0.15rem;
+}
+
+.card.scholar-card .icon {
+    color: var(--accent-gold);
+}
+
+.icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.1rem;
+}
+
+.info-value {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Specific highlight for high school / university */
+.school-name {
+    font-weight: 600;
+}
+
+/* Hidden elements */
+.hidden {
+    display: none !important;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    border: 1px dashed var(--blueprint-blue);
+    background: var(--blueprint-light);
+    border-radius: 4px;
+    margin-top: 2rem;
+}
+
+/* Responsive Grid adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+    .container {
+        padding: 1.5rem 1rem;
+    }
+    header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+    .blueprint-metadata {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .nominees-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
